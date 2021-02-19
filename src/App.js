@@ -5,8 +5,8 @@ import UserCard from './components/UserCard';
 import Progress from './components/Progress';
 
 function App() {
-  const [results, setResults] = useState(8);
-  const users = useFetch('https://api.randomuser.me/', results);
+  const [page, setPage] = useState(1);
+  const users = useFetch('https://api.randomuser.me/', page);
 
   useEffect(() => {
 
@@ -14,13 +14,13 @@ function App() {
       const scrollTop = ( document.documentElement && document.documentElement.scrollTop ) || document.body.scrollTop;
         const scrollHeight = ( document.documentElement && document.documentElement.scrollHeight ) || document.body.scrollHeight;
         if (scrollTop + window.innerHeight + 50 >= scrollHeight){
-          setResults(results + 8);
+          setPage(page + 1);
         }
     }
 
     window.addEventListener('scroll', useHandleScroll);
     return () => window.removeEventListener('scroll', useHandleScroll);
-  }, [results]);
+  }, [page]);
 
   
     return (
